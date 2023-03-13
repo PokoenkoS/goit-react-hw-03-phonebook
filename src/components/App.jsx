@@ -12,6 +12,18 @@ export class App extends Component{
     contacts: [],
     filter: ''
   }
+componentDidUpdate(prevProps, prevState) {
+  if(this.state.contacts !== prevState.contacts) {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+  }
+}
+componentDidMount() {
+  const user = localStorage.getItem('contacts');
+  const parsedUser = JSON.parse(user);
+  if(parsedUser) {
+    this.setState({contacts: parsedUser})
+  }
+}
 
 formSubmitHendler = data =>{
  
